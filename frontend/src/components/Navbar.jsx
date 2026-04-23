@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link
-              to="/dashboard"
+              to="/"
               className="text-white font-bold text-xl hover:text-gray-200 transition duration-300"
             >
               Lost & Found
