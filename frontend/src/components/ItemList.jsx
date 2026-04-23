@@ -9,7 +9,9 @@ const ItemList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/api/items");
+        const res = await axios.get(
+          "https://lost-found-management-system-0igl.onrender.com/api/items",
+        );
         setItems(res.data);
       } catch (err) {
         console.error(err);
@@ -22,7 +24,7 @@ const ItemList = () => {
     console.log("Searching for:", search);
     try {
       const res = await axios.get(
-        `http://localhost:3001/api/items/search?name=${encodeURIComponent(search)}`,
+        `https://lost-found-management-system-0igl.onrender.com/api/items/search?name=${encodeURIComponent(search)}`,
       );
       console.log("Search results:", res.data);
       setItems(res.data);
@@ -33,7 +35,9 @@ const ItemList = () => {
 
   const handleShowAll = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/items");
+      const res = await axios.get(
+        "https://lost-found-management-system-0igl.onrender.com/api/items",
+      );
       setItems(res.data);
     } catch (err) {
       console.error(err);

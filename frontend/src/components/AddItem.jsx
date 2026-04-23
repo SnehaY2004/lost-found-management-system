@@ -22,9 +22,13 @@ const AddItem = () => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      await axios.post("http://localhost:3001/api/items", formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        "https://lost-found-management-system-0igl.onrender.com/api/items",
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       navigate("/items");
     } catch (err) {
       console.error(err.response.data);

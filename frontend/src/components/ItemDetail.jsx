@@ -9,7 +9,9 @@ const ItemDetail = () => {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/items/${id}`);
+        const res = await axios.get(
+          `https://lost-found-management-system-0igl.onrender.com/api/items/${id}`,
+        );
         setItem(res.data);
       } catch (err) {
         console.error(err);

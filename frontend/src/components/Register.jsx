@@ -19,7 +19,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3001/api/auth/register",
+        "https://lost-found-management-system-0igl.onrender.com/api/auth/register",
         formData,
       );
       localStorage.setItem("token", res.data.token);

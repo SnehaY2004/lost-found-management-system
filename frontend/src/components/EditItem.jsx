@@ -17,7 +17,9 @@ const EditItem = () => {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/items/${id}`);
+        const res = await axios.get(
+          `https://lost-found-management-system-0igl.onrender.com/api/items/${id}`,
+        );
         setFormData({
           itemName: res.data.itemName,
           description: res.data.description,
@@ -42,9 +44,13 @@ const EditItem = () => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      await axios.put(`http://localhost:3001/api/items/${id}`, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `https://lost-found-management-system-0igl.onrender.com/api/items/${id}`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       navigate("/items");
     } catch (err) {
       console.error(err.response.data);
@@ -57,9 +63,12 @@ const EditItem = () => {
     }
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:3001/api/items/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `https://lost-found-management-system-0igl.onrender.com/api/items/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       navigate("/items");
     } catch (err) {
       console.error(err.response.data);

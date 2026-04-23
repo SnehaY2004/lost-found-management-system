@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3001/api/auth/login",
+        "https://lost-found-management-system-0igl.onrender.com/api/auth/login",
         formData,
       );
       localStorage.setItem("token", res.data.token);
