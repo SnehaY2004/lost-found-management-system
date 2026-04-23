@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  const [stats, setStats] = useState({ total: 0, lost: 0, found: 0 });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch(
+          "https://lost-found-management-system-0igl.onrender.com/api/items",
+        );
+        const items = await res.json();
+        const total = items.length;
+        const lost = items.filter((item) => item.type === "Lost").length;
+        const found = items.filter((item) => item.type === "Found").length;
+        setStats({ total, lost, found });
+      } catch (err) {
+        console.error("Failed to load dashboard stats", err);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
     <div className="min-h-screen bg-blue-900">
       <div className="container mx-auto px-4 py-16">
@@ -14,7 +35,7 @@ const Dashboard = () => {
               Help reunite lost items with their owners. Report found items or
               search for what you've lost.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <Link
                 to="/add-item"
                 className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 shadow-lg"
@@ -27,6 +48,26 @@ const Dashboard = () => {
               >
                 Search Lost Items
               </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+              <div className="bg-blue-900 text-white rounded-xl p-6 shadow-lg">
+                <p className="text-sm uppercase tracking-wide text-blue-200">
+                  Total Items
+                </p>
+                <p className="mt-3 text-4xl font-bold">{stats.total}</p>
+              </div>
+              <div className="bg-red-600 text-white rounded-xl p-6 shadow-lg">
+                <p className="text-sm uppercase tracking-wide text-red-100">
+                  Lost Items
+                </p>
+                <p className="mt-3 text-4xl font-bold">{stats.lost}</p>
+              </div>
+              <div className="bg-green-600 text-white rounded-xl p-6 shadow-lg">
+                <p className="text-sm uppercase tracking-wide text-green-100">
+                  Found Items
+                </p>
+                <p className="mt-3 text-4xl font-bold">{stats.found}</p>
+              </div>
             </div>
           </div>
 
